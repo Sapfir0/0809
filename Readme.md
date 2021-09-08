@@ -1,1 +1,0 @@
-Yurev Alexander 
