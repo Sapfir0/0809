@@ -1,5 +1,6 @@
 import 'App.css';
 import React, { useState } from 'react';
+import { CodeBlock } from 'react-code-blocks';
 
 const simpleProps = [
     'center',
@@ -38,21 +39,34 @@ const colors = ['blue', 'yellow', 'lime', 'purple', 'tomato', 'black', '#FF7518'
 function App() {
     const [aligner, setAligner] = useState(properties[0]);
     const [typeOfAlign, setTypeOfAlign] = useState(mappedValues[aligner][0]);
+
+    const styles = `.container {
+        display: grid; 
+        grid-template-columns: repeat(3, 120px);
+        grid-template-rows: repeat(3, 120px);
+        ${aligner}: ${typeOfAlign};
+    }`;
+
     return (
         <>
-            <h2>Select align:</h2>
-            <select onChange={(e) => setAligner(e.target.value)}>
-                {properties.map((p) => (
-                    <option>{p}</option>
-                ))}
-            </select>
+            <div className="options">
+                <div>
+                    <h2>Select align:</h2>
+                    <select onChange={(e) => setAligner(e.target.value)}>
+                        {properties.map((p) => (
+                            <option>{p}</option>
+                        ))}
+                    </select>
 
-            <h2>Select type of align:</h2>
-            <select onChange={(e) => setTypeOfAlign(e.target.value)}>
-                {mappedValues[aligner].map((p) => (
-                    <option>{p}</option>
-                ))}
-            </select>
+                    <h2>Select type of align:</h2>
+                    <select onChange={(e) => setTypeOfAlign(e.target.value)}>
+                        {mappedValues[aligner].map((p) => (
+                            <option>{p}</option>
+                        ))}
+                    </select>
+                </div>
+                <CodeBlock text={styles} language="css" showLineNumbers={true} wrapLines />
+            </div>
             <div
                 className="container"
                 style={{
